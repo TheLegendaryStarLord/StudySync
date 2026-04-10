@@ -8,6 +8,7 @@ npm install
 
 This installs:
 - `discord.js` - Discord bot framework
+- `better-sqlite3` - Local SQLite database
 - `dotenv` - Environment variables
 
 ### 2. Register Commands
@@ -25,9 +26,7 @@ Slash commands were registered successfully!
 ### 3. Run the Bot
 
 ```bash
-npm start
-# or with nodemon:
-npx nodemon src/index.js
+nodemon
 ```
 
 You should see:
@@ -35,6 +34,8 @@ You should see:
 YourBotName is online!
 ✅ Reminder check loop started!
 ```
+
+The database file (`data/studysync.db`) is created automatically on first run.
 
 ## Commands
 
@@ -90,14 +91,13 @@ StudySync/
 ├── src/
 │   ├── index.js              # Main bot file with all commands
 │   ├── register-commands.js  # Slash command registration
-│   ├── storage.js            # In-memory reminder storage
-│   ├── tasks-storage.js      # JSON-based task storage
+│   ├── database.js           # SQLite database (reminders + tasks)
 │   ├── reminder-parser.js    # Time format parsing
 │   └── reminder-loop.js      # Background reminder checker
 ├── data/
-│   └── tasks.json            # User tasks (created automatically)
+│   └── studysync.db          # SQLite database (created automatically)
 ├── package.json
-├── .env                      # Your bot token
+└── .env                      # Your bot token
 ```
 
 ## How It Works
@@ -105,14 +105,20 @@ StudySync/
 ### Study Reminders
 1. User runs `/studyremind` with title and time
 2. Bot parses the time (supports 5+ formats)
-3. Reminder stored in memory
+3. Reminder stored in SQLite database
 4. Background task checks every 30 seconds for due reminders
 5. When due, bot sends DM (or falls back to channel message)
 6. Reminder marked as delivered
-7. **Note:** Reminders are lost when bot restarts (stored in memory)
+7. **Reminders persist across bot restarts** ✅
 
 ### Study To-Do List
 1. User runs `/addtask` with task details
-2. Bot stores task in JSON file (`data/tasks.json`)
+2. Bot stores task in SQLite database
 3. User can view, complete, or delete tasks
-4. **Tasks persist across bot restarts** (saved in JSON)
+4. **Tasks persist across bot restarts** ✅
+
+### Database
+- Uses `better-sqlite3` for local SQLite storage
+- All data stored in `data/studysync.db`
+- Automatic schema creation on startup
+- No external database server needed
