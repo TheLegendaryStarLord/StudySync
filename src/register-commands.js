@@ -130,6 +130,97 @@ const commands = [
     {
         name: 'cleartasks',
         description: 'Delete all your tasks (cannot be undone)',
+    },
+    // ===== ASSIGNMENT DEADLINE COMMANDS =====
+    {
+        name: 'adddeadline',
+        description: 'Add an assignment deadline',
+        options: [
+            {
+                name: 'title',
+                description: 'Assignment or task name',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'due_date',
+                description: 'Due date (YYYY-MM-DD or YYYY-MM-DD HH:mm)',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'subject',
+                description: 'Class or subject name (optional)',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+            {
+                name: 'notes',
+                description: 'Extra information (optional)',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+        ]
+    },
+    {
+        name: 'deadlines',
+        description: 'View all your assignment deadlines',
+    },
+    {
+        name: 'upcoming',
+        description: 'View deadlines due within the next 7 days',
+    },
+    {
+        name: 'removedeadline',
+        description: 'Remove an assignment deadline',
+        options: [
+            {
+                name: 'deadline_id',
+                description: 'The ID of the deadline to remove',
+                type: ApplicationCommandOptionType.Integer,
+                required: true,
+            },
+        ]
+    },
+    {
+        name: 'updatedeadline',
+        description: 'Update an existing deadline',
+        options: [
+            {
+                name: 'deadline_id',
+                description: 'The ID of the deadline to update',
+                type: ApplicationCommandOptionType.Integer,
+                required: true,
+            },
+            {
+                name: 'title',
+                description: 'New assignment name (optional)',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+            {
+                name: 'due_date',
+                description: 'New due date (optional)',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+            {
+                name: 'subject',
+                description: 'New subject name (optional)',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+            {
+                name: 'notes',
+                description: 'New notes (optional)',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+        ]
+    },
+    {
+        name: 'cleardeadlines',
+        description: 'Remove all your assignment deadlines',
     }
 ];
 
