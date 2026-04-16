@@ -5,6 +5,7 @@ const { parseReminderTime } = require('./reminder-parser');
 const { startReminderLoop } = require('./reminder-loop');
 const { parseDeadlineDate } = require('./deadline-parser');
 const { startDeadlineReminderLoop } = require('./deadline-reminders');
+const { buildScheduleForUser } = require('./scheduleHelper');
 
 // Initialize database
 initDatabase();
